@@ -19,7 +19,7 @@ export const QuestionSection: React.FC = () => {
   return (
     <section className="space-y-4">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-xl border border-zinc-200/80 shadow-xs">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 bg-white p-4 sm:p-5 rounded-xl border border-zinc-200/80 shadow-xs">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-[11px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-md border border-zinc-200/70">
@@ -29,16 +29,16 @@ export const QuestionSection: React.FC = () => {
               기본 역량 답변 (핵심 경험 5문항)
             </h2>
           </div>
-          <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed">
+          <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
             지원할 모든 기업의 자소서에 반영될 본인의 핵심 프로젝트와 역량을 5개 기본 문항에 나누어 입력합니다.
           </p>
         </div>
 
         {/* Stats & Actions */}
-        <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-100/80 rounded-lg text-xs text-zinc-700 font-medium">
-            <CheckCircle className="w-3.5 h-3.5 text-zinc-500" />
-            <span>작성 완료:</span>
+        <div className="flex items-center gap-1.5 sm:gap-2.5 flex-wrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 bg-zinc-100/80 rounded-lg text-xs text-zinc-700 font-medium">
+            <CheckCircle className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+            <span>작성:</span>
             <span className="font-bold text-zinc-900 font-mono">
               {completedCount} / {questions.length}
             </span>
@@ -49,7 +49,7 @@ export const QuestionSection: React.FC = () => {
           <button
             type="button"
             onClick={loadSampleAnswers}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-zinc-700 bg-zinc-100 hover:bg-zinc-200/80 rounded-lg transition-colors border border-zinc-200 shadow-2xs"
+            className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 text-xs font-semibold text-zinc-700 bg-zinc-100 hover:bg-zinc-200/80 rounded-lg transition-colors border border-zinc-200 shadow-2xs"
             title="테스트용 예시 기본 답변 5개를 즉시 채웁니다"
           >
             <span>예시 채우기</span>
@@ -62,7 +62,7 @@ export const QuestionSection: React.FC = () => {
                 resetAnswers();
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1.5 text-xs font-medium text-zinc-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
             title="5개 문항 모두 초기화"
           >
             <Trash2 className="w-3.5 h-3.5" /> 비우기

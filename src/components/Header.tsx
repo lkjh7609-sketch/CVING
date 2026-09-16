@@ -44,58 +44,62 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-white/90 backdrop-blur-md border-b border-zinc-200/80 sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo & Brand */}
-        <div className="flex items-center gap-3 select-none">
-          <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center shadow-xs shrink-0 ring-1 ring-zinc-800/80">
-            <FileCheck2 className="w-4 h-4 text-zinc-100" />
+        <div className="flex items-center gap-2 sm:gap-3 select-none shrink-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-zinc-900 text-white flex items-center justify-center shadow-xs shrink-0 ring-1 ring-zinc-800/80">
+            <FileCheck2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-100" />
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-xl font-extrabold tracking-tight text-zinc-950">
+          <div className="flex items-baseline gap-1.5 sm:gap-2">
+            <span className="text-lg sm:text-xl font-extrabold tracking-tight text-zinc-950">
               CVING
             </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-semibold px-2 py-0.5 bg-zinc-100 rounded-md border border-zinc-200/70">
+            <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-semibold px-1.5 sm:px-2 py-0.5 bg-zinc-100 rounded border border-zinc-200/70">
               STUDIO
             </span>
           </div>
         </div>
 
         {/* Status Indicators & Action Buttons */}
-        <div className="flex items-center gap-2">
-          {/* Demo Mode / API Key Status Badge */}
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          {/* Demo Mode / API Key Status Badge (클릭 시 설정 모달 열림) */}
           {settings.isDemoMode ? (
-            <div
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-lg bg-zinc-100 text-zinc-600 border border-zinc-200/80 select-none cursor-default"
-              title="현재 시뮬레이션 데모 모드로 실행 중입니다 (설정에서 API 키 등록 가능)"
+            <button
+              type="button"
+              onClick={onOpenSettings}
+              className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-medium rounded-lg bg-zinc-100 hover:bg-zinc-200/70 text-zinc-700 border border-zinc-200/80 transition-colors select-none"
+              title="현재 시뮬레이션 데모 모드로 실행 중입니다 (클릭하여 API 키 설정)"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-              <span>데모 모드</span>
-            </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+              <span>데모<span className="hidden sm:inline"> 모드</span></span>
+            </button>
           ) : (
-            <div
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200/80 select-none cursor-default"
-              title="API 키가 설정되어 활성화되었습니다"
+            <button
+              type="button"
+              onClick={onOpenSettings}
+              className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-medium rounded-lg bg-zinc-100 hover:bg-zinc-200/70 text-zinc-800 border border-zinc-200/80 transition-colors select-none"
+              title="API 키가 설정되어 활성화되었습니다 (클릭하여 설정 변경)"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span className="truncate max-w-[70px] sm:max-w-none">
                 {settings.provider === 'gemini'
                   ? 'Gemini'
                   : settings.provider === 'anthropic'
                   ? 'Claude'
-                  : 'OpenAI'}{' '}
-                연결됨
+                  : 'OpenAI'}
               </span>
-            </div>
+              <span className="hidden sm:inline">연결됨</span>
+            </button>
           )}
 
           {/* Guide Button */}
           <button
             type="button"
             onClick={onOpenGuide}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors border border-transparent hover:border-zinc-200"
+            className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors border border-transparent hover:border-zinc-200"
             title="사용 가이드"
           >
-            <HelpCircle className="w-3.5 h-3.5" />
+            <HelpCircle className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
             <span className="hidden sm:inline">가이드</span>
           </button>
 
@@ -103,10 +107,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onOpenPrompts}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors border border-transparent hover:border-zinc-200"
+            className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors border border-transparent hover:border-zinc-200"
             title="프롬프트 설정"
           >
-            <Sliders className="w-3.5 h-3.5" />
+            <Sliders className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
             <span className="hidden sm:inline">프롬프트</span>
           </button>
 
@@ -114,10 +118,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onOpenSettings}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200/80 border border-zinc-200 rounded-lg transition-colors shadow-2xs"
+            className="inline-flex items-center justify-center gap-1.5 p-1.5 sm:px-3 sm:py-1.5 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200/80 border border-zinc-200 rounded-lg transition-colors shadow-2xs"
             title="API 및 환경 설정"
           >
-            <Settings className="w-3.5 h-3.5 text-zinc-700" />
+            <Settings className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-zinc-700" />
             <span className="hidden sm:inline">설정</span>
           </button>
 
@@ -125,10 +129,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={handleResetAll}
-            className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors ml-0.5"
+            className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
             title="모든 데이터 초기화"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
           </button>
         </div>
       </div>

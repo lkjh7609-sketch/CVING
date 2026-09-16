@@ -57,13 +57,13 @@ export const GenerationControl: React.FC<GenerationControlProps> = ({ onOpenProm
     isBatchGenerating || Object.values(results).some((r) => r.status === 'generating');
 
   return (
-    <div className="bg-zinc-950 text-zinc-100 rounded-2xl p-5 sm:p-6 border border-zinc-800/90 shadow-sm">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+    <div className="bg-zinc-950 text-zinc-100 rounded-2xl p-4 sm:p-6 border border-zinc-800/90 shadow-sm">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-5">
         {/* Left Info */}
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <h3 className="text-base font-bold tracking-tight text-white">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+            <h3 className="text-sm sm:text-base font-bold tracking-tight text-white">
               기업별 맞춤 자기소개서 생성 스튜디오
             </h3>
           </div>
@@ -86,20 +86,21 @@ export const GenerationControl: React.FC<GenerationControlProps> = ({ onOpenProm
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 w-full lg:w-auto">
           {isAnyGenerating ? (
-            <div className="flex items-center gap-2.5">
-              <div className="flex items-center gap-2 px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-xs font-medium text-zinc-200">
-                <Loader2 className="w-3.5 h-3.5 animate-spin text-zinc-400" />
-                <span>문항별 실시간 생성 중...</span>
+            <div className="flex items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+              <div className="flex-1 lg:flex-initial flex items-center justify-center gap-2 px-3 sm:px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-xs font-medium text-zinc-200">
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-zinc-400 shrink-0" />
+                <span className="truncate">실시간 생성 중...</span>
               </div>
               <button
                 type="button"
                 onClick={cancelGeneration}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow-xs transition-all active:scale-[0.98]"
+                className="shrink-0 inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold rounded-xl shadow-xs transition-all active:scale-[0.98]"
                 title="진행 중인 자소서 생성을 즉시 중단하고 작성된 내용을 보존합니다"
               >
-                <StopCircle className="w-3.5 h-3.5" /> 생성 중단
+                <StopCircle className="w-3.5 h-3.5" />
+                <span>중단</span>
               </button>
             </div>
           ) : (
@@ -107,7 +108,7 @@ export const GenerationControl: React.FC<GenerationControlProps> = ({ onOpenProm
               type="button"
               disabled={!canGenerate}
               onClick={handleGenerateAll}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white text-zinc-950 hover:bg-zinc-100 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-xs font-bold rounded-xl shadow-xs hover:shadow transition-all active:scale-[0.98]"
+              className="w-full lg:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-white text-zinc-950 hover:bg-zinc-100 active:bg-zinc-200 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-xs sm:text-sm font-bold rounded-xl shadow-xs hover:shadow transition-all active:scale-[0.98]"
             >
               <span>전체 기업 자소서 일괄 생성</span>
             </button>

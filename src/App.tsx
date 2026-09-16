@@ -32,7 +32,7 @@ export function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-5 sm:space-y-8">
         {/* Section 1: Basic Questions (5 prompts) */}
         <QuestionSection />
 
@@ -47,13 +47,13 @@ export function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-zinc-200/80 py-6 mt-12 text-xs text-zinc-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <footer className="bg-white border-t border-zinc-200/80 py-6 mt-8 sm:mt-12 text-xs text-zinc-500">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div className="flex items-center gap-1.5 text-zinc-500 font-medium">
             <span className="font-mono text-zinc-900 font-semibold tracking-tight">CVING</span>
             <span>&copy; {new Date().getFullYear()} Ben Lee. All rights reserved.</span>
           </div>
-          <div className="flex items-center gap-1.5 text-zinc-400">
+          <div className="flex items-center justify-center sm:justify-start gap-1.5 text-zinc-400 text-[11px] sm:text-xs">
             <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>개인정보 안심: 모든 답변과 이미지는 브라우저(LocalStorage / IndexedDB)에만 안전하게 저장됩니다.</span>
           </div>

@@ -287,17 +287,17 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl border border-zinc-200 flex flex-col max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-zinc-900/60 backdrop-blur-xs animate-in fade-in duration-200">
+      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl border border-zinc-200 flex flex-col max-h-[92vh] sm:max-h-[90vh] overflow-hidden">
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50/60">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200/60 flex items-center justify-center">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50/60">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
+            <div className="w-8 h-8 rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200/60 flex items-center justify-center shrink-0">
               <Settings className="w-4 h-4" />
             </div>
-            <div>
-              <h2 className="text-base font-semibold text-zinc-900 tracking-tight">환경 및 생성 설정</h2>
-              <p className="text-xs text-zinc-500">
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm sm:text-base font-semibold text-zinc-900 tracking-tight truncate">환경 및 생성 설정</h2>
+              <p className="text-[11px] sm:text-xs text-zinc-500 truncate">
                 AI API Gateway 연동 및 문항별 생성 글자수를 설정합니다.
               </p>
             </div>
@@ -305,18 +305,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-zinc-400 hover:text-zinc-600 rounded-lg hover:bg-zinc-100 transition-colors"
+            className="p-1.5 text-zinc-400 hover:text-zinc-600 rounded-lg hover:bg-zinc-100 transition-colors shrink-0 ml-2"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-zinc-200 bg-zinc-50/60 px-6 pt-2 gap-2">
+        <div className="flex border-b border-zinc-200 bg-zinc-50/60 px-3 sm:px-6 pt-2 gap-1.5 sm:gap-2 overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setActiveTab('api')}
-            className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-t-lg transition-all border-b-2 ${
+            className={`flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-semibold rounded-t-lg transition-all border-b-2 shrink-0 ${
               activeTab === 'api'
                 ? 'border-zinc-900 text-zinc-900 bg-white shadow-2xs'
                 : 'border-transparent text-zinc-500 hover:text-zinc-800'
@@ -329,14 +329,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
           <button
             type="button"
             onClick={() => setActiveTab('lengths')}
-            className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-t-lg transition-all border-b-2 ${
+            className={`flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-semibold rounded-t-lg transition-all border-b-2 shrink-0 ${
               activeTab === 'lengths'
                 ? 'border-zinc-900 text-zinc-900 bg-white shadow-2xs'
                 : 'border-transparent text-zinc-500 hover:text-zinc-800'
             }`}
           >
             <AlignLeft className="w-3.5 h-3.5" />
-            <span>문항별 답변 글자수 지정</span>
+            <span>문항별 글자수 지정</span>
             <span className="ml-1 px-1.5 py-0.2 rounded-full bg-zinc-100 text-zinc-700 text-[10px] font-mono border border-zinc-200/60">
               5문항
             </span>
@@ -344,7 +344,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           {activeTab === 'api' ? (
             /* TAB 1: API & Gateway Settings */
             <div className="space-y-5">
@@ -861,17 +861,17 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
               </div>
 
               {/* Batch Preset Buttons */}
-              <div className="flex items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                <span className="text-xs font-bold text-slate-700">전체 문항 일괄 설정:</span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                <span className="text-xs font-bold text-slate-700 shrink-0">전체 문항 일괄 설정:</span>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {[500, 800, 1000, 1500].map((presetLen) => (
                     <button
                       key={presetLen}
                       type="button"
                       onClick={() => handleSetAllLengths(presetLen)}
-                      className="px-2.5 py-1 text-xs font-semibold bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-300 hover:border-purple-300 rounded-lg transition-colors shadow-2xs"
+                      className="px-2 sm:px-2.5 py-1 text-xs font-semibold bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-700 border border-slate-300 hover:border-purple-300 rounded-lg transition-colors shadow-2xs"
                     >
-                      전체 {presetLen.toLocaleString()}자
+                      {presetLen.toLocaleString()}자
                     </button>
                   ))}
                 </div>
@@ -886,7 +886,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                   return (
                     <div
                       key={q.id}
-                      className="p-3.5 bg-white border border-slate-200 rounded-xl hover:border-slate-300 transition-all shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                      className="p-3 sm:p-3.5 bg-white border border-slate-200 rounded-xl hover:border-slate-300 transition-all shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3"
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
@@ -898,34 +898,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                           </span>
                         </div>
                         <p className="text-[11px] text-slate-400 mt-0.5 pl-7 truncate">
-                          현재 작성된 기본 답변: <span className="font-mono text-slate-600">{draftLen.toLocaleString()}자</span>
+                          현재 작성된 기본 답변: {draftLen.toLocaleString()}자
                         </p>
                       </div>
 
-                      {/* Controls for this question */}
-                      <div className="flex items-center gap-2 pl-7 sm:pl-0 shrink-0">
-                        {/* Quick Presets for single item */}
-                        <div className="flex items-center gap-1">
-                          {[500, 800, 1000, 1500].map((p) => (
-                            <button
-                              key={p}
-                              type="button"
-                              onClick={() =>
-                                setLocalLengths((prev) => ({ ...prev, [q.id]: p }))
-                              }
-                              className={`text-[10px] px-1.5 py-0.5 rounded border transition-colors ${
-                                currentLen === p
-                                  ? 'bg-purple-600 text-white border-purple-600 font-bold'
-                                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200'
-                              }`}
-                            >
-                              {p}자
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Direct Number Input */}
-                        <div className="flex items-center gap-1 ml-1">
+                      {/* Input Control */}
+                      <div className="flex items-center justify-between sm:justify-end gap-3 pl-7 sm:pl-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+                        <span className="text-xs text-slate-500 sm:hidden">목표 글자수:</span>
+                        <div className="flex items-center gap-1.5">
                           <input
                             type="number"
                             min={100}
@@ -934,9 +914,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                             value={currentLen}
                             onChange={(e) => {
                               const val = parseInt(e.target.value, 10);
-                              if (!isNaN(val)) {
-                                setLocalLengths((prev) => ({ ...prev, [q.id]: val }));
-                              }
+                              setLocalLengths((prev) => ({
+                                ...prev,
+                                [q.id]: isNaN(val) ? 0 : val,
+                              }));
                             }}
                             className="w-20 px-2 py-1 text-xs font-mono font-bold text-right border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:border-purple-500"
                           />
@@ -952,7 +933,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3.5 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between">
           <button
             type="button"
             onClick={() => {
@@ -964,20 +945,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
             }}
             className="text-xs text-zinc-400 hover:text-zinc-600 transition-colors"
           >
-            기본값으로 리셋
+            기본값 리셋
           </button>
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-medium text-zinc-600 hover:text-zinc-800 rounded-lg hover:bg-zinc-200 transition-colors"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-medium text-zinc-600 hover:text-zinc-800 rounded-lg hover:bg-zinc-200 transition-colors"
             >
               취소
             </button>
             <button
               type="button"
               onClick={handleSave}
-              className="px-4 py-2 text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg shadow-2xs transition-colors"
+              className="px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg shadow-2xs transition-colors"
             >
               설정 저장
             </button>
