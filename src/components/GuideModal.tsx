@@ -7,13 +7,25 @@ interface GuideModalProps {
 }
 
 export const GuideModal: React.FC<GuideModalProps> = ({ isOpen, onClose }) => {
+  // Lock body scroll on mobile/iOS Safari when modal is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-zinc-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl border border-zinc-200 flex flex-col max-h-[92vh] sm:max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 h-[100dvh] z-50 flex flex-col items-center justify-center p-2.5 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-zinc-900/60 backdrop-blur-xs animate-in fade-in duration-200">
+      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl border border-zinc-200 flex flex-col max-h-[calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-1.5rem)] sm:max-h-[88vh] overflow-hidden my-auto">
         {/* Modal Header */}
-        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50/60">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-zinc-200 flex items-center justify-between bg-zinc-50/60 shrink-0">
           <div className="flex items-center gap-2.5 min-w-0 flex-1">
             <div className="w-8 h-8 rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200/60 flex items-center justify-center shrink-0">
               <Zap className="w-4 h-4" />
@@ -33,7 +45,7 @@ export const GuideModal: React.FC<GuideModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 text-xs leading-relaxed text-zinc-700">
+        <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-3 text-xs leading-relaxed text-zinc-700 overscroll-contain">
           {/* Step 1 */}
           <div className="flex gap-3 p-3.5 rounded-xl bg-zinc-50/60 border border-zinc-200">
             <span className="w-6 h-6 rounded bg-zinc-100 text-zinc-700 font-mono text-xs font-semibold flex items-center justify-center shrink-0 border border-zinc-200">
@@ -101,7 +113,7 @@ export const GuideModal: React.FC<GuideModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Modal Footer */}
-        <div className="px-4 sm:px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end">
+        <div className="px-4 sm:px-6 py-3 border-t border-zinc-200 bg-zinc-50 flex justify-end shrink-0">
           <button
             type="button"
             onClick={onClose}
