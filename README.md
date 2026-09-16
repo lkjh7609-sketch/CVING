@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/cving-thumbnail.jpg" alt="CVING STUDIO" width="320" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);" />
+</p>
+
 # CVING STUDIO (시빙 스튜디오)
 
 > **공통 마스터 답변 기반 맞춤형 AI 자기소개서 생성 & 채용공고 정밀 분석 도구**
