@@ -75,11 +75,18 @@ export default async function handler(req, res) {
       } catch (streamErr) {
         console.error('[Anthropic Stream Error]:', streamErr);
         const status = streamErr?.status || 500;
-        const message =
+        let message =
           streamErr?.error?.error?.message ||
           streamErr?.error?.message ||
           streamErr?.message ||
           '스트리밍 호출 실패';
+        if (
+          typeof message === 'string' &&
+          (message.includes('<!DOCTYPE') || message.includes('Just a moment') || message.includes('Cloudflare'))
+        ) {
+          message =
+            'AIApiFlow(Cloudflare) 봇 방화벽 차단(403): Vercel 클라우드 서버의 접속이 게이트웨이의 Cloudflare 봇 방화벽에 의해 차단되었습니다. [공식 앤트로픽 API 키]를 사용하시거나 Google Gemini를 이용해주세요.';
+        }
         res.write(`data: ${JSON.stringify({ error: { message, status } })}\n\n`);
         res.end();
       }
@@ -95,6 +102,14 @@ export default async function handler(req, res) {
     }
   } catch (err) {
     console.error('[Anthropic Serverless Error]:', err);
-    return res.status(500).json({ error: { message: err.message || 'Server error' } });
+    let message = err?.message || 'Server error';
+    if (
+      typeof message === 'string' &&
+      (message.includes('<!DOCTYPE') || message.includes('Just a moment') || message.includes('Cloudflare'))
+    ) {
+      message =
+        'AIApiFlow(Cloudflare) 봇 방화벽 차단(403): Vercel 클라우드 서버의 접속이 게이트웨이의 Cloudflare 봇 방화벽에 의해 차단되었습니다. [공식 앤트로픽 API 키]를 사용하시거나 Google Gemini를 이용해주세요.';
+    }
+    return res.status(err?.status || 500).json({ error: { message, status: err?.status || 500 } });
   }
 }

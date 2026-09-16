@@ -264,6 +264,14 @@ class AIService {
         errMessage = 'Google Gemini API 키가 올바르지 않습니다. AI Studio에서 발급받은 키를 다시 확인해주세요.';
       } else if (errMessage.includes('RESOURCE_EXHAUSTED')) {
         errMessage = 'API 호출 한도를 초과했습니다. 잠시 후 다시 시도해주세요.';
+      } else if (
+        errMessage.includes('<!DOCTYPE') ||
+        errMessage.includes('Just a moment') ||
+        errMessage.includes('Cloudflare') ||
+        response.status === 403
+      ) {
+        errMessage =
+          'AIApiFlow(Cloudflare) 403 봇 방화벽 차단: Vercel 서버리스 접속이 게이트웨이 보안 정책(Cloudflare)에 의해 차단되었습니다. [공식 앤트로픽 API 키]를 사용하시거나 Google Gemini를 이용해주세요.';
       }
 
       throw new Error(errMessage);

@@ -282,6 +282,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
           `연결 실패 (${res.status}): 엔드포인트 URL 또는 API 키를 확인해주세요.`;
         if (errMsg.includes('API_KEY_INVALID') || errMsg.includes('API key not valid')) {
           errMsg = 'Google Gemini API 키가 올바르지 않습니다. AI Studio에서 발급받은 키를 확인해주세요.';
+        } else if (
+          errMsg.includes('<!DOCTYPE') ||
+          errMsg.includes('Just a moment') ||
+          errMsg.includes('Cloudflare') ||
+          errMsg.includes('challenge-error') ||
+          res.status === 403
+        ) {
+          errMsg =
+            'AIApiFlow(Cloudflare) 403 봇 방화벽 차단: Vercel 클라우드 서버의 접속이 게이트웨이 보안 정책(Cloudflare)에 의해 차단되었습니다. [공식 앤트로픽 API 키]를 사용하시거나 Google Gemini를 이용해주세요.';
         }
         setTestResult({
           success: false,

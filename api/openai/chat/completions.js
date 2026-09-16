@@ -70,7 +70,16 @@ export default async function handler(req, res) {
       }
       res.end();
     } else {
-      const data = await upstreamRes.text();
+      let data = await upstreamRes.text();
+      if (data.includes('<!DOCTYPE') || data.includes('Just a moment') || data.includes('Cloudflare')) {
+        data = JSON.stringify({
+          error: {
+            message:
+              '게이트웨이의 Cloudflare 봇 방화벽(403)에 의해 차단되었습니다. 공식 OpenAI API 키를 사용하시거나 Google Gemini를 이용해주세요.',
+            status: upstreamRes.status,
+          },
+        });
+      }
       res.writeHead(upstreamRes.status, {
         'Content-Type': 'application/json; charset=utf-8',
         'Access-Control-Allow-Origin': '*',
